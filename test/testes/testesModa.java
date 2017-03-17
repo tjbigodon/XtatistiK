@@ -14,18 +14,24 @@ import java.util.Arrays;
  */
 public class testesModa {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ArrayIndexOutOfBoundsException {
         int qtd = 0;
-        String[] moda;
         ArrayList<String> dados = new ArrayList<>();
+        ArrayList<String> modaFinal = new ArrayList<>();
+        ArrayList<String> moda = new ArrayList<>();
         dados.add("a");
-        dados.add("h");
         dados.add("b");
+        dados.add("a");
         dados.add("c");
         dados.add("d");
-        dados.add("d");
-        dados.add("i");
+        dados.add("e");
+        dados.add("f");
+        dados.add("f");
+        dados.add("f");
+        dados.add("g");
         dados.add("h");
+        dados.add("i");
+        dados.add("j");
         dados.add("j");
 
         int[] total = new int[dados.size()];
@@ -35,63 +41,49 @@ public class testesModa {
 
         for (int i = 0; i < dados.size(); i++) {
             qtd++;
-            System.out.println(qtd + " = " + dados.get(i));
-
             olho = dados.get(i);
             for (int j = 0; j < dados.size(); j++) {
                 if (olho.equals(dados.get(j))) {
                     total[j] = total[j] + 1;
                 }
             }
-
-        }
-
-        System.out.println("Valores possíveis de Moda");
-        for (int i = 0; i < dados.size(); i++) {
-            System.out.println(dados.get(i) + " = " + total[i]);
         }
 
         //Verifica Maior valor do vetor
         int maior = 0;
-        int pos = 0;
         int tmoda = 0;
         for (int i = 0; i < dados.size(); i++) {
             if (maior < total[i]) {
                 maior = total[i];
-                pos = i;
                 tmoda++;
             }
         }
 
-        int nModa = 0;
+        //Preenche a lista da moda final
         for (int i = 0; i < dados.size(); i++) {
-            if (maior == total[i]) {
-                nModa++;
-            }
+            modaFinal.add(dados.get(i));
         }
-        //System.out.println("N = "+ nModa);
-
-        moda = new String[nModa];
-        int a = 0;
-        for (int i = 0; i < dados.size(); i++) {
-            for (int j = 0; j < dados.size(); j++) {
-                olho = dados.get(i);
-                if (olho.equals(dados.get(j)) && j != i) {
-                    moda[a] = dados.get(j);
-                    a++;
+        
+        //Verifica onde estão os index das possíveis modas.
+        ArrayList<Integer> index = new ArrayList<>();
+        int[] valores = new int[modaFinal.size()];
+        int posi = 0;
+        for (int i = 0; i < modaFinal.size(); i++) {
+            posi++;
+            olho = modaFinal.get(i);
+            for (int j = 0; j < modaFinal.size(); j++) {
+                if (olho.equals(modaFinal.get(j))) {
+                    valores[j] = valores[j] + 1;
                 }
             }
+            index.add(valores[i]);
         }
 
-        for (int i = 0; i < moda.length; i++) {
-            olho = moda[i];
-            if (olho.equals(moda[i+1]) && i != 0) {
-            } else {
-                System.out.println("Moda = " + moda[i]);
+        for (int i = 0; i < modaFinal.size(); i++) {
+            if (index.get(i) == maior) {
+                moda.add(modaFinal.get(i));
             }
         }
-
-        //System.out.println("");
-        //System.out.println("Moda = "+ dados.get(pos)); //-> para único elemento é fácil
+        System.out.println("Moda = " + moda.toString());
     }
 }
