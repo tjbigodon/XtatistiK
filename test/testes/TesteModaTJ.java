@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class TesteModaTJ {
     public static void main(String[] args) {
         ArrayList<String> valor = new ArrayList(); //arraylist capturado
-        ArrayList<String> aux = new ArrayList(); //arraylist com itens diferentes
+        ArrayList<String> aux = new ArrayList(); //arraylist com itens diferentes. Pode ajudar, por exemplo, na criação da tabela de frequências, se ela existir.
         int moda = 0;
         int classifModa = 0;
         valor.add("a");
@@ -34,9 +34,9 @@ public class TesteModaTJ {
         valor.add("j");
         valor.add("j");
       
-        aux.add(valor.get(0));
+        aux.add(valor.get(0)); //adiciona o primeiro item ao arraylist dos diferentes
         
-        for(int i = 0; i<valor.size(); i++){ //laço que deleta os valores repetidos de aux;
+        for(int i = 0; i<valor.size(); i++){ //laço que adiciona somente os valores únicos ao aux
             for(int j = 0; j<valor.size() ; j++){
                 if(!valor.get(i).equals(valor.get(j))){
                     if(!verifExistencia(aux,valor.get(j))){
@@ -47,9 +47,9 @@ public class TesteModaTJ {
             break;
         }
         
-        int freqAcum[] = new int[aux.size()];
+        int freqAcum[] = new int[aux.size()]; //vetor que pega a frequência acumulada
         
-        for(int i = 0; i<aux.size(); i++){ //laço que deleta os valores repetidos de aux;
+        for(int i = 0; i<aux.size(); i++){ 
             for(int j = 0; j<valor.size() ; j++){
                 if(aux.get(i).equals(valor.get(j))){
                     freqAcum[i]++;
@@ -57,12 +57,14 @@ public class TesteModaTJ {
             }
         }
         
+        //laço que atribui qual frequência absoluta será a moda
         for(int j = 0; j<aux.size() ; j++){
             if(moda<freqAcum[j]){
                 moda = freqAcum[j];
             }
         }
-        String resultado = new String("Moda: [");
+        
+        String resultado = new String("Moda: ["); //string que apresentará o resultado final
         
         for(int j = 0; j<aux.size() ; j++){
             if(moda==freqAcum[j]){
@@ -73,7 +75,7 @@ public class TesteModaTJ {
                 }
             }
         }
-        
+        //condicional que deleta o final do resultado, pra ficar mais bonito
         if(resultado.endsWith("/ ")){
             char[] resultadoChar = new char[resultado.length()-3];
             resultado.getChars(0, resultado.length()-3, resultadoChar,0);
