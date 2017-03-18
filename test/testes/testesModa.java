@@ -5,8 +5,8 @@
  */
 package testes;
 
+import funcoes.MedidaPosicao;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  *
@@ -17,7 +17,6 @@ public class testesModa {
     public static void main(String[] args) throws ArrayIndexOutOfBoundsException {
         int qtd = 0;
         ArrayList<String> dados = new ArrayList<>();
-        ArrayList<String> modaFinal = new ArrayList<>();
         ArrayList<String> moda = new ArrayList<>();
         dados.add("a");
         dados.add("b");
@@ -33,57 +32,11 @@ public class testesModa {
         dados.add("i");
         dados.add("j");
         dados.add("j");
-
-        int[] total = new int[dados.size()];
-        String olho;
-
-        System.out.println(dados.toString());
-
-        for (int i = 0; i < dados.size(); i++) {
-            qtd++;
-            olho = dados.get(i);
-            for (int j = 0; j < dados.size(); j++) {
-                if (olho.equals(dados.get(j))) {
-                    total[j] = total[j] + 1;
-                }
-            }
-        }
-
-        //Verifica Maior valor do vetor
-        int maior = 0;
-        int tmoda = 0;
-        for (int i = 0; i < dados.size(); i++) {
-            if (maior < total[i]) {
-                maior = total[i];
-                tmoda++;
-            }
-        }
-
-        //Preenche a lista da moda final
-        for (int i = 0; i < dados.size(); i++) {
-            modaFinal.add(dados.get(i));
-        }
         
-        //Verifica onde estão os index das possíveis modas.
-        ArrayList<Integer> index = new ArrayList<>();
-        int[] valores = new int[modaFinal.size()];
-        int posi = 0;
-        for (int i = 0; i < modaFinal.size(); i++) {
-            posi++;
-            olho = modaFinal.get(i);
-            for (int j = 0; j < modaFinal.size(); j++) {
-                if (olho.equals(modaFinal.get(j))) {
-                    valores[j] = valores[j] + 1;
-                }
-            }
-            index.add(valores[i]);
-        }
-
-        for (int i = 0; i < modaFinal.size(); i++) {
-            if (index.get(i) == maior) {
-                moda.add(modaFinal.get(i));
-            }
-        }
-        System.out.println("Moda = " + moda.toString());
+        MedidaPosicao modaFuncao = new MedidaPosicao();
+        moda = modaFuncao.moda(dados);
+        
+        System.out.println(moda.toString());
+        
     }
 }
