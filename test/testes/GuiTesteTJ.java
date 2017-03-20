@@ -40,9 +40,11 @@ public class GuiTesteTJ extends javax.swing.JFrame {
         btLimpar = new javax.swing.JButton();
         btAdicionar = new javax.swing.JButton();
         btExcluir = new javax.swing.JButton();
+        btDuplicar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("XtatistiK - Moda");
+        setFocusCycleRoot(false);
         setResizable(false);
 
         tabelaItens.setModel(new javax.swing.table.DefaultTableModel(
@@ -92,39 +94,48 @@ public class GuiTesteTJ extends javax.swing.JFrame {
             }
         });
 
+        btDuplicar.setText("Duplicar Item");
+        btDuplicar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDuplicarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btCalcular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(36, 36, 36))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(71, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btCalcular, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btDuplicar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btExcluir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btAdicionar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                        .addComponent(btLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btAdicionar)
-                    .addComponent(btExcluir))
+                .addComponent(btAdicionar)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btLimpar)
-                    .addComponent(btCalcular))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btExcluir)
+                .addGap(18, 18, 18)
+                .addComponent(btDuplicar)
+                .addGap(18, 18, 18)
+                .addComponent(btLimpar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 18, Short.MAX_VALUE)
+                .addComponent(btCalcular)
+                .addGap(6, 6, 6))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGap(24, 24, 24))
         );
 
         pack();
@@ -241,12 +252,14 @@ public class GuiTesteTJ extends javax.swing.JFrame {
         if(!(item==null)&&!item.isEmpty()){
             itens.add(item);
             modelo.setRowCount(itens.size());
-            System.out.println(modelo.getRowCount());
             for(int i = 0; i<modelo.getRowCount();i++){
                 modelo.setValueAt(itens.get(i), i, 0);
             }
             tabelaItens.setModel(modelo);
-        }else{
+        }else if(item==null){
+            
+        }
+        else{
             JOptionPane.showMessageDialog(this, "Entre com um valor válido!", "Erro!", JOptionPane.ERROR_MESSAGE);
             tabelaItens.setModel(modelo);
         }
@@ -269,6 +282,36 @@ public class GuiTesteTJ extends javax.swing.JFrame {
         
         modelo.setRowCount(0);
     }//GEN-LAST:event_btLimparActionPerformed
+
+    private void btDuplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDuplicarActionPerformed
+        DefaultTableModel modelo = (DefaultTableModel)tabelaItens.getModel();
+        boolean erroNaoSelecionado = true;
+        int linhaSelecionada = -1;
+        
+        
+        for(int i = 0; i<modelo.getRowCount(); i++){
+            if(tabelaItens.isRowSelected(i)){
+                erroNaoSelecionado = false;
+                linhaSelecionada = i;
+                break;
+            } else{
+                erroNaoSelecionado = true;
+            }
+        }
+        
+        if(modelo.getRowCount()==0){
+            JOptionPane.showMessageDialog(this, "Adicione itens à tabela para duplicá-los!", "XtatistiK - Erro", JOptionPane.ERROR_MESSAGE);
+        }else{
+            if(erroNaoSelecionado == false){
+                modelo.setRowCount(modelo.getRowCount()+1);
+                modelo.setValueAt(modelo.getValueAt(linhaSelecionada,0) , modelo.getRowCount()-1 , 0);
+            } else{
+                JOptionPane.showMessageDialog(this, "Selecione um item para ser duplicado!", "XtatistiK - Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        tabelaItens.setModel(modelo);
+    }//GEN-LAST:event_btDuplicarActionPerformed
 
     
     public static boolean verifExistencia(ArrayList<String> arrayNomes,String nome){
@@ -317,6 +360,7 @@ public class GuiTesteTJ extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAdicionar;
     private javax.swing.JButton btCalcular;
+    private javax.swing.JButton btDuplicar;
     private javax.swing.JButton btExcluir;
     private javax.swing.JButton btLimpar;
     private javax.swing.JScrollPane jScrollPane1;
