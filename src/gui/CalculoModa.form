@@ -32,12 +32,10 @@
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="btCalcular" pref="116" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="btDuplicar" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btExcluir" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btAdicionar" alignment="0" pref="116" max="32767" attributes="0"/>
-                      <Component id="btLimpar" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="btDuplicar" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btExcluir" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btAdicionar" alignment="0" pref="116" max="32767" attributes="0"/>
+                  <Component id="btLimpar" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="26" max="32767" attributes="0"/>
           </Group>

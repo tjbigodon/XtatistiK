@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package testes;
+package gui;
 
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -13,12 +13,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Tarcisio
  */
-public class JanelaResultado extends javax.swing.JFrame {
+public class ResultadoModa extends javax.swing.JFrame {
 
     /**
      * Creates new form JanelaResultado
      */
-    public JanelaResultado() {
+    public ResultadoModa() {
         initComponents();
     }
 
@@ -149,20 +149,21 @@ public class JanelaResultado extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JanelaResultado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ResultadoModa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JanelaResultado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ResultadoModa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JanelaResultado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ResultadoModa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JanelaResultado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ResultadoModa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JanelaResultado().setVisible(true);
+                new ResultadoModa().setVisible(true);
             }
         });
     }

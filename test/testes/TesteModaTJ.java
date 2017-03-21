@@ -16,6 +16,7 @@ public class TesteModaTJ {
         ArrayList<String> aux = new ArrayList(); //arraylist com itens diferentes. Pode ajudar, por exemplo, na criação da tabela de frequências, se ela existir.
         int moda = 0;
         int classifModa = 0;
+        boolean amodal = true;
         valor.add("a");
         valor.add("b");
         valor.add("a");
@@ -85,6 +86,16 @@ public class TesteModaTJ {
         
         resultado = (resultado+"].\n");
         
+        for(int i = 0; i<aux.size(); i++){
+            if(freqAcum[i]==1){
+                amodal = true;
+            }else{
+                amodal = false;
+                break;
+            }
+        }
+        
+        System.out.println(amodal);
         
         switch(classifModa){
             case 0:
@@ -97,7 +108,11 @@ public class TesteModaTJ {
                 resultado = (resultado+"Bimodal!");
                 break;
             default:
-                resultado = (resultado+"Multimodal!");
+                if(amodal==true){
+                    resultado = (resultado + "Amodal!");
+                }else{
+                    resultado = (resultado+"Multimodal!");
+                }
                 break;
         }
         System.out.println(resultado);
