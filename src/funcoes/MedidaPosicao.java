@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * @author Jehymison Gil Alves Oliveira
  */
 public class MedidaPosicao {
+
     //Moda
     //Média
     //Mediana
@@ -19,14 +20,15 @@ public class MedidaPosicao {
 
     /**
      * Construtor da Classe para definição de utilização dos métodos.
-     * @param tipoVariaveis 
+     *
+     * @param tipoVariaveis
      */
     public MedidaPosicao(String tipoVariaveis) {
         if (tipoVariaveis.equalsIgnoreCase("Qualitativa")) {
             ArrayList<String> dados = new ArrayList<>();
             this.tipo = tipoVariaveis;
         } else if (tipoVariaveis.equalsIgnoreCase("Quantitativa")) {
-            ArrayList<Float> dados = new ArrayList<>();
+            ArrayList<Double> dados = new ArrayList<>();
             this.tipo = tipoVariaveis;
         }
     }
@@ -36,27 +38,15 @@ public class MedidaPosicao {
 
     /**
      * Método para cálculo de Moda.
+     *
      * @param dados
      * @return moda
      */
-    public ArrayList<String> moda(ArrayList<String> dados) {
+    public String moda(ArrayList<String> dados) {
         int qtd = 0;
+        String tipo = null;
         ArrayList<String> modaFinal = new ArrayList<>();
         ArrayList<String> moda = new ArrayList<>();
-        dados.add("a");
-        dados.add("b");
-        dados.add("a");
-        dados.add("c");
-        dados.add("d");
-        dados.add("e");
-        dados.add("f");
-        dados.add("f");
-        dados.add("f");
-        dados.add("g");
-        dados.add("h");
-        dados.add("i");
-        dados.add("j");
-        dados.add("j");
 
         int[] total = new int[dados.size()];
         String olho;
@@ -68,23 +58,24 @@ public class MedidaPosicao {
                     total[j] = total[j] + 1;
                 }
             }
+            //System.out.println(total[i] + " = " + dados.get(i));
         }
 
         //Verifica Maior valor do vetor
         int maior = 0;
-        int tmoda = 0;
         for (int i = 0; i < dados.size(); i++) {
             if (maior < total[i]) {
                 maior = total[i];
-                tmoda++;
             }
         }
+        //System.out.println("Maior = "+ maior);
 
         //Preenche a lista da moda final
         for (int i = 0; i < dados.size(); i++) {
             modaFinal.add(dados.get(i));
         }
-        
+        //System.out.println(modaFinal.toString());
+
         //Verifica onde estão os index das possíveis modas.
         ArrayList<Integer> index = new ArrayList<>();
         int[] valores = new int[modaFinal.size()];
@@ -98,6 +89,7 @@ public class MedidaPosicao {
                 }
             }
             index.add(valores[i]);
+            //System.out.println(valores[i] + " = " + index.get(i));
         }
 
         for (int i = 0; i < modaFinal.size(); i++) {
@@ -105,11 +97,40 @@ public class MedidaPosicao {
                 moda.add(modaFinal.get(i));
             }
         }
-        return moda;
+
+        qtd = 0;
+        for (int i = 0; i < moda.size(); i++) {
+            qtd++;
+        }
+
+        double resp = 0;
+        int count = 0;
+        for (int i = 0; i < valores.length; i++) {
+            resp = resp + valores[i];
+            count++;
+        }
+
+        resp = resp / count;
+
+        if (qtd != 0 && resp == 1.0) {
+            tipo = "Amodal";
+        }
+        if (qtd == 1 && resp > 1.0) {
+            tipo = "Unimodal -> "+moda.toString();
+        }
+        if (qtd == 2 && resp > 1.0) {
+            tipo = "Bimodal -> "+moda.toString();
+        }
+        if (qtd > 2 && resp > 1.0) {
+            tipo = "Multimodal -> "+moda.toString();
+        }
+
+        return tipo;
     }
 
     /**
      * Método para cálculo de Média.
+     *
      * @return valorMedia
      */
     public float media() {
