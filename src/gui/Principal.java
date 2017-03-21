@@ -21,12 +21,8 @@ public class Principal {
         spl.setUndecorated(true);
         spl.setLocationRelativeTo(null);
         spl.setVisible(true);
-        
-        try {
-            Thread.sleep (3000);            
-        }
-        catch (InterruptedException ex) {}
-        
+        spl.preencheBarra();
+       
         spl.dispose();
         
         CalculoModa cm = new CalculoModa();

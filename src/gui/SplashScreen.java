@@ -5,18 +5,20 @@
  */
 package gui;
 
+import javax.swing.JProgressBar;
+
 /**
  *
  * @author guest-ja9hva
  */
 public class SplashScreen extends javax.swing.JFrame {
-    int progresso;
 
     /**
      * Creates new form SplashScreen
      */
-    public SplashScreen() {
+    public SplashScreen(){
         initComponents();
+        
     }
 
     /**
@@ -35,7 +37,7 @@ public class SplashScreen extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Splash.jpg"))); // NOI18N
 
-        BProgressoSplash.setValue(0);
+        BProgressoSplash.setMaximum(50);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -61,6 +63,15 @@ public class SplashScreen extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
+    public void preencheBarra(){
+        for (int i = 1; i < 70; i++) {
+            BProgressoSplash.setValue(i);
+            try{
+            Thread.sleep(50);
+            }catch(InterruptedException e){}
+        }
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
