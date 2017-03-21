@@ -6,6 +6,9 @@
 
 package gui;
 
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,12 +17,26 @@ import javax.swing.table.DefaultTableModel;
  * @author Tarcisio
  */
 public class ResultadoModa extends javax.swing.JFrame {
-
+    
+    //Variáveis setadas para utilização da imagem do sistema
+    //Ateção: Não apague estas variáveis.
+    URL url = this.getClass().getResource("../img/X32.png");
+    Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);
+    
+    /**
+     * Método que define a imagen do incone para a janela.
+     * @param iconeTitulo
+     */
+    public void setTitulo(Image iconeTitulo) {
+        this.setIconImage(iconeTitulo);
+    }
+    
     /**
      * Creates new form JanelaResultado
      */
     public ResultadoModa() {
         initComponents();
+        setIconImage(iconeTitulo);
     }
 
     /**
