@@ -17,7 +17,7 @@ public class SplashScreen extends javax.swing.JFrame {
     
     //Variáveis setadas para utilização da imagem do sistema
     //Ateção: Não apague estas variáveis.
-    URL url = this.getClass().getResource("../img/X32.png");
+    URL url = this.getClass().getResource("/img/X32.png");
     Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);
     
     /**
@@ -25,12 +25,14 @@ public class SplashScreen extends javax.swing.JFrame {
      * @param iconeTitulo
      */
     public void setTitulo(Image iconeTitulo) {
-        this.setIconImage(iconeTitulo);
+       this.setIconImage(iconeTitulo);
     }
     
     /**
      * Creates new form SplashScreen
      */
+    
+    
     public SplashScreen(){
         initComponents();
         setIconImage(iconeTitulo);
