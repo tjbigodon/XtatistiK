@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package testes;
+package gui;
 
 import java.util.ArrayList;
 import javax.swing.JFrame;
@@ -16,12 +16,12 @@ import javax.swing.table.TableModel;
  *
  * @author Tarcisio
  */
-public class GuiTesteTJ extends javax.swing.JFrame {
+public class CalculoModa extends javax.swing.JFrame {
 
     /**
      * Creates new form GuiTesteTJ
      */
-    public GuiTesteTJ() {
+    public CalculoModa() {
         initComponents();
     }
 
@@ -121,11 +121,10 @@ public class GuiTesteTJ extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btCalcular, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(btDuplicar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btExcluir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btAdicionar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
-                        .addComponent(btLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(btDuplicar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                    .addComponent(btLimpar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -159,6 +158,7 @@ public class GuiTesteTJ extends javax.swing.JFrame {
         ArrayList<String> itensDif = new ArrayList(); //arraylist contendo apenas itens diferentes
         DefaultTableModel modelo = (DefaultTableModel)tabelaItens.getModel(); 
         String item;
+        boolean amodal = true;
         
         for(int i = 0; i<modelo.getRowCount();i++){
             item = String.valueOf(modelo.getValueAt(i, 0));
@@ -199,26 +199,41 @@ public class GuiTesteTJ extends javax.swing.JFrame {
             }
         }
         
-        String resultado = new String("Moda: ["); //string que apresentará o resultado final
-        
-        for(int j = 0; j<itensDif.size() ; j++){
-            if(moda==freqAcum[j]){
-                resultado = (resultado+itensDif.get(j));
-                classifModa++;
-                if(!(j+1==itensDif.size())){
-                    resultado = (resultado+" / ");
-                }
+        for(int i = 0; i<itensDif.size(); i++){
+            if(freqAcum[i]==1){
+                amodal = true;
+            }else{
+                amodal = false;
+                break;
             }
         }
-        //condicional que deleta o final do resultado, pra ficar mais bonito
-        if(resultado.endsWith("/ ")){
-            char[] resultadoChar = new char[resultado.length()-3];
-            resultado.getChars(0, resultado.length()-3, resultadoChar,0);
-            
-            resultado = String.valueOf(resultadoChar);
-        }
         
-        resultado = (resultado+"]");
+        String resultado = new String("Moda: ["); //string que apresentará o resultado final
+        
+        if(amodal == false){
+            
+            for(int j = 0; j<itensDif.size() ; j++){
+                if(moda==freqAcum[j]){
+                    resultado = (resultado+itensDif.get(j));
+                    classifModa++;
+                    if(!(j+1==itensDif.size())){
+                        resultado = (resultado+" / ");
+                    }
+                }
+            }
+            //condicional que deleta o final do resultado, pra ficar mais bonito
+            if(resultado.endsWith("/ ")){
+                char[] resultadoChar = new char[resultado.length()-3];
+                resultado.getChars(0, resultado.length()-3, resultadoChar,0);
+
+                resultado = String.valueOf(resultadoChar);
+            }
+
+            resultado = (resultado+"]");
+        } else{
+            resultado = (resultado+"]");
+        }
+         
         
         String tipoModa;
         switch(classifModa){
@@ -232,11 +247,15 @@ public class GuiTesteTJ extends javax.swing.JFrame {
                 tipoModa = ("Bimodal!");
                 break;
             default:
-                tipoModa = ("Multimodal!");
+                if(amodal==true){
+                    tipoModa = ("Amodal!");
+                }else{
+                    tipoModa = ("Multimodal!");
+                }
                 break;
         }
         
-        JanelaResultado jr = new JanelaResultado();
+        ResultadoModa jr = new ResultadoModa();
         jr.preencherTabela(itensDif, freqAcum);
         jr.resultado(resultado, tipoModa);
         
@@ -363,20 +382,21 @@ public class GuiTesteTJ extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GuiTesteTJ.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CalculoModa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GuiTesteTJ.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CalculoModa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GuiTesteTJ.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CalculoModa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GuiTesteTJ.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CalculoModa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GuiTesteTJ().setVisible(true);
+                new CalculoModa().setVisible(true);
             }
         });
     }
