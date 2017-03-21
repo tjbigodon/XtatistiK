@@ -23,7 +23,7 @@ public class Principal {
         spl.setVisible(true);
         
         try {
-            Thread.sleep (3000);
+            Thread.sleep (3000);            
         }
         catch (InterruptedException ex) {}
         
