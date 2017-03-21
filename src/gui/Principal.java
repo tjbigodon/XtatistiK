@@ -5,8 +5,6 @@
  */
 package gui;
 
-import javax.swing.JFrame;
-
 /**
  *
  * @author guest-ja9hva
@@ -14,12 +12,13 @@ import javax.swing.JFrame;
 public class Principal {
     public static void main(String[] args) {
         SplashScreen spl = new SplashScreen();
-        spl.setVisible(true);
+        spl.setVisible(false);
         //caso fosse usar "df.setUndecorated(true)" agora , daria erro
         //para isso
         spl.dispose();
         spl.setUndecorated(true);
         spl.setLocationRelativeTo(null);
+        spl.setSize(626, 294);
         spl.setVisible(true);
         spl.preencheBarra();
        
@@ -27,7 +26,9 @@ public class Principal {
         
         CalculoModa cm = new CalculoModa();
         cm.setLocationRelativeTo(null);
-        cm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //cm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        cm.setVisible(false);
+        cm.dispose();
         cm.setVisible(true);
         }
 }

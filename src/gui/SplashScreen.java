@@ -5,20 +5,35 @@
  */
 package gui;
 
-import javax.swing.JProgressBar;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 
 /**
  *
  * @author guest-ja9hva
  */
 public class SplashScreen extends javax.swing.JFrame {
-
+    
+    //Variáveis setadas para utilização da imagem do sistema
+    //Ateção: Não apague estas variáveis.
+    URL url = this.getClass().getResource("../img/X32.png");
+    Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);
+    
+    /**
+     * Método que define a imagen do incone para a janela.
+     * @param iconeTitulo
+     */
+    public void setTitulo(Image iconeTitulo) {
+        this.setIconImage(iconeTitulo);
+    }
+    
     /**
      * Creates new form SplashScreen
      */
     public SplashScreen(){
         initComponents();
-        
+        setIconImage(iconeTitulo);
     }
 
     /**
@@ -44,9 +59,10 @@ public class SplashScreen extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(BProgressoSplash, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(BProgressoSplash, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
