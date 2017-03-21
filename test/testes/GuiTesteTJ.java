@@ -66,35 +66,45 @@ public class GuiTesteTJ extends javax.swing.JFrame {
         tabelaItens.setToolTipText("Tabela de itens");
         jScrollPane1.setViewportView(tabelaItens);
 
+        btCalcular.setMnemonic('c');
         btCalcular.setText("Calcular Moda");
+        btCalcular.setToolTipText("Clique aqui para calcular a moda dos itens da tabela!");
         btCalcular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCalcularActionPerformed(evt);
             }
         });
 
+        btLimpar.setMnemonic('l');
         btLimpar.setText("Limpar Tabela");
+        btLimpar.setToolTipText("Clique aqui para limpar a tabela de itens!");
         btLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btLimparActionPerformed(evt);
             }
         });
 
+        btAdicionar.setMnemonic('a');
         btAdicionar.setText("Adicionar Item");
+        btAdicionar.setToolTipText("Clique para adicionar um item à tabela ao lado.");
         btAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAdicionarActionPerformed(evt);
             }
         });
 
+        btExcluir.setMnemonic('e');
         btExcluir.setText("Excluir Item");
+        btExcluir.setToolTipText("Clique para excluir um item selecionado na tabela ao lado.");
         btExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btExcluirActionPerformed(evt);
             }
         });
 
+        btDuplicar.setMnemonic('d');
         btDuplicar.setText("Duplicar Item");
+        btDuplicar.setToolTipText("Clique para duplicar um item selecionado na tabela.");
         btDuplicar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btDuplicarActionPerformed(evt);
@@ -267,11 +277,18 @@ public class GuiTesteTJ extends javax.swing.JFrame {
 
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
         DefaultTableModel modelo = (DefaultTableModel)tabelaItens.getModel();
-        
-        for(int i = 0; i<modelo.getRowCount(); i++){
+        int linhasSelecionadas = 0;
+        int tamanhoTabela = modelo.getRowCount();
+        for(int i = 0; i<tamanhoTabela; i++){
             if(tabelaItens.isRowSelected(i)){
+                linhasSelecionadas++;
                 modelo.removeRow(i);
+                i--;
             }
+        }
+        
+        if(linhasSelecionadas==0){
+            JOptionPane.showMessageDialog(this, "Selecione um item a ser excluído!", "XtatistiK - Erro", JOptionPane.ERROR_MESSAGE);
         }
         
         tabelaItens.setModel(modelo);
@@ -279,8 +296,15 @@ public class GuiTesteTJ extends javax.swing.JFrame {
 
     private void btLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimparActionPerformed
         DefaultTableModel modelo = (DefaultTableModel)tabelaItens.getModel();
+        boolean confirmaLimpeza = false;
         
-        modelo.setRowCount(0);
+        if(modelo.getRowCount()==0){
+            JOptionPane.showMessageDialog(this, "Tabela já está vazia!", "XtatistiK - Erro", JOptionPane.ERROR_MESSAGE);
+        }else{
+            if(JOptionPane.showConfirmDialog(this, "Deseja REALMENTE limpar a tabela de itens?", "XtatistiK - Confirmar?",JOptionPane.YES_NO_OPTION)==0){
+                modelo.setRowCount(0);
+            }
+        }
     }//GEN-LAST:event_btLimparActionPerformed
 
     private void btDuplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDuplicarActionPerformed

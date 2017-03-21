@@ -100,7 +100,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="btCalcular">
       <Properties>
+        <Property name="mnemonic" type="int" value="99"/>
         <Property name="text" type="java.lang.String" value="Calcular Moda"/>
+        <Property name="toolTipText" type="java.lang.String" value="Clique aqui para calcular a moda dos itens da tabela!"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCalcularActionPerformed"/>
@@ -108,7 +110,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btLimpar">
       <Properties>
+        <Property name="mnemonic" type="int" value="108"/>
         <Property name="text" type="java.lang.String" value="Limpar Tabela"/>
+        <Property name="toolTipText" type="java.lang.String" value="Clique aqui para limpar a tabela de itens!"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btLimparActionPerformed"/>
@@ -116,7 +120,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btAdicionar">
       <Properties>
+        <Property name="mnemonic" type="int" value="97"/>
         <Property name="text" type="java.lang.String" value="Adicionar Item"/>
+        <Property name="toolTipText" type="java.lang.String" value="Clique para adicionar um item &#xe0; tabela ao lado."/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btAdicionarActionPerformed"/>
@@ -124,7 +130,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btExcluir">
       <Properties>
+        <Property name="mnemonic" type="int" value="101"/>
         <Property name="text" type="java.lang.String" value="Excluir Item"/>
+        <Property name="toolTipText" type="java.lang.String" value="Clique para excluir um item selecionado na tabela ao lado."/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btExcluirActionPerformed"/>
@@ -132,7 +140,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btDuplicar">
       <Properties>
+        <Property name="mnemonic" type="int" value="100"/>
         <Property name="text" type="java.lang.String" value="Duplicar Item"/>
+        <Property name="toolTipText" type="java.lang.String" value="Clique para duplicar um item selecionado na tabela."/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btDuplicarActionPerformed"/>
