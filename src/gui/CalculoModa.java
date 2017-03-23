@@ -51,6 +51,7 @@ public class CalculoModa extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSlider1 = new javax.swing.JSlider();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaItens = new javax.swing.JTable();
         btCalcular = new javax.swing.JButton();
@@ -430,6 +431,7 @@ public class CalculoModa extends javax.swing.JFrame {
     private javax.swing.JButton btExcluir;
     private javax.swing.JButton btLimpar;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSlider jSlider1;
     private javax.swing.JTable tabelaItens;
     // End of variables declaration//GEN-END:variables
 }

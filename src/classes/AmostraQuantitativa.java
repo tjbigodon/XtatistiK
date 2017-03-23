@@ -15,6 +15,13 @@ public class AmostraQuantitativa implements Quantitativa{
     private String nome;
     private ArrayList<Double> amostra = new ArrayList<>(); 
 
+    public AmostraQuantitativa(String nome) {
+        this.nome = nome;
+    }
+
+    public AmostraQuantitativa() {
+    }
+    
     @Override
     public String mostrarAmostra() {
         return amostra.toString();

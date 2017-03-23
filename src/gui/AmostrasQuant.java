@@ -17,7 +17,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AmostrasQuant extends javax.swing.JFrame {
 
-    AmostraQuantitativa novaAmostra;
+    ArrayList<AmostraQuantitativa> amostras;
+    int indexAmostras = -1;
     String nomeAmostra;
 
     /**
@@ -221,8 +222,14 @@ public class AmostrasQuant extends javax.swing.JFrame {
             if (nomeAmostra.equals("") || nomeAmostra.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "O nome não pode ser nulo.\n Tente novamente.", "ERRO", 0);
             } else {
-                novaAmostra = new AmostraQuantitativa();
-                novaAmostra.setNomeAmostra(nomeAmostra);
+                if(amostras==null){
+                    amostras = new ArrayList();
+                    amostras.add(new AmostraQuantitativa(nomeAmostra));
+                    indexAmostras++;
+                }else{
+                    amostras.add(new AmostraQuantitativa(nomeAmostra));
+                    indexAmostras++;
+                }
             }
         } catch (NullPointerException ex) {
 
@@ -237,6 +244,7 @@ public class AmostrasQuant extends javax.swing.JFrame {
 
     private void B_InsereValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_InsereValorActionPerformed
         ArrayList<String> itens = new ArrayList();
+        
         String item = null;
         DefaultTableModel modelo = (DefaultTableModel)T_Amostras.getModel();
         
@@ -245,6 +253,31 @@ public class AmostrasQuant extends javax.swing.JFrame {
 
         String[] amostra = valores.split(Pattern.quote(";"));
         
+        for(int i = 0; i<modelo.getRowCount(); i++){
+            itens.add(String.valueOf(modelo.getValueAt(i, 1)));
+        }
+        
+         for(int i = 0; i<amostra.length; i++){
+            itens.add(amostra[i]);
+        }
+        
+        modelo.setRowCount(itens.size());
+        
+        for(int i = 0; i<amostras.size(); i++){
+            for(int j = 0; j<itens.size(); j++){
+                if(){
+                    
+                }
+            }
+            amostras.get(i).insereAmostra(Double.parseDouble(itens.get(i)));
+        }
+        
+        for(int i = 0; i<modelo.getRowCount(); i++){
+            modelo.setValueAt(novaAmostra.getNomeAmostra(), i, 0);
+            modelo.setValueAt(itens.get(i), i, 1);
+        }
+        
+        T_Amostras.setModel(modelo);
         /*
         Falta só colocar os valores de amostra na lista e mostrar na tabela
         */
