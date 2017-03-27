@@ -134,13 +134,13 @@ public class ResultadoModa extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void preencherTabela(ArrayList<String> itensDif, int[] freqAcum){
+    public void preencherTabela(ArrayList<String> itensDif, int[] freqAbs){
         DefaultTableModel modelo = (DefaultTableModel)tabelaItens.getModel();
         
         modelo.setRowCount(itensDif.size());
         for(int i = 0; i<modelo.getRowCount();i++){
             modelo.setValueAt(itensDif.get(i), i, 0);
-            modelo.setValueAt(freqAcum[i] , i , 1);
+            modelo.setValueAt(freqAbs[i] , i , 1);
         }
     }
     

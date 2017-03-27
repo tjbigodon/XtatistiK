@@ -200,26 +200,26 @@ public class CalculoModa extends javax.swing.JFrame {
             break;
         }
         
-        int freqAcum[] = new int[itensDif.size()]; //vetor que pega a frequência acumulada
+        int freqAbs[] = new int[itensDif.size()]; //vetor que pega a frequência acumulada
         
         
         for(int i = 0; i<itensDif.size(); i++){ 
             for(int j = 0; j<itens.size() ; j++){
                 if(itensDif.get(i).equals(itens.get(j))){
-                    freqAcum[i]++;
+                    freqAbs[i]++;
                 }
             }
         }
         
         //laço que atribui qual frequência absoluta será a moda
         for(int j = 0; j<itensDif.size() ; j++){
-            if(moda<freqAcum[j]){
-                moda = freqAcum[j];
+            if(moda<freqAbs[j]){
+                moda = freqAbs[j];
             }
         }
         
         for(int i = 0; i<itensDif.size(); i++){
-            if(freqAcum[i]==1){
+            if(freqAbs[i]==1){
                 amodal = true;
             }else{
                 amodal = false;
@@ -232,7 +232,7 @@ public class CalculoModa extends javax.swing.JFrame {
         if(amodal == false){
             
             for(int j = 0; j<itensDif.size() ; j++){
-                if(moda==freqAcum[j]){
+                if(moda==freqAbs[j]){
                     resultado = (resultado+itensDif.get(j));
                     classifModa++;
                     if(!(j+1==itensDif.size())){
@@ -275,7 +275,7 @@ public class CalculoModa extends javax.swing.JFrame {
         }
         
         ResultadoModa jr = new ResultadoModa();
-        jr.preencherTabela(itensDif, freqAcum);
+        jr.preencherTabela(itensDif, freqAbs);
         jr.resultado(resultado, tipoModa);
         
         jr.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

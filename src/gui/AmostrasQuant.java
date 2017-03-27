@@ -210,7 +210,7 @@ public class AmostrasQuant extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void B_LimparTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_LimparTabelaActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_B_LimparTabelaActionPerformed
 
     private void B_NovaAmostraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_NovaAmostraActionPerformed
