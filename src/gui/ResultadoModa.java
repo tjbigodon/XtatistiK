@@ -85,7 +85,7 @@ public class ResultadoModa extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Itens", "Freq. Acum."
+                "Itens", "Freq. Abs."
             }
         ) {
             Class[] types = new Class [] {
