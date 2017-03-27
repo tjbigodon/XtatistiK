@@ -265,15 +265,15 @@ public class AmostrasQuant extends javax.swing.JFrame {
         
         for(int i = 0; i<amostras.size(); i++){
             for(int j = 0; j<itens.size(); j++){
-                if(){
+                //if(){
                     
-                }
+                //}
             }
             amostras.get(i).insereAmostra(Double.parseDouble(itens.get(i)));
         }
         
         for(int i = 0; i<modelo.getRowCount(); i++){
-            modelo.setValueAt(novaAmostra.getNomeAmostra(), i, 0);
+//            modelo.setValueAt(novaAmostra.getNomeAmostra(), i, 0);
             modelo.setValueAt(itens.get(i), i, 1);
         }
         
