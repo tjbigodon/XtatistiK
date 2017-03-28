@@ -131,15 +131,19 @@ public class XtatistiKPrincipal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Selecione uma opção válida!", "XtatistiK - Erro!", JOptionPane.ERROR_MESSAGE);
                 break;
             case 1:
+                System.out.println(cbEscolha.getSelectedIndex());
                 CalculoModa cm = new CalculoModa();
                 cm.setLocationRelativeTo(null);
                 cm.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
                 cm.setVisible(true);
+                break;
             case 2:
+                System.out.println(cbEscolha.getSelectedIndex());
                 CalculoDistFreq cdf = new CalculoDistFreq();
                 cdf.setLocationRelativeTo(null);
                 cdf.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
                 cdf.setVisible(true);
+                break;
         }
     }//GEN-LAST:event_btAbrirActionPerformed
 
