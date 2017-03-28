@@ -6,6 +6,7 @@
 package gui;
 
 import classes.AmostraQuantitativa;
+import static gui.CalculoModa.verifExistencia;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -18,7 +19,6 @@ import javax.swing.table.DefaultTableModel;
 public class AmostrasQuant extends javax.swing.JFrame {
 
     ArrayList<AmostraQuantitativa> amostras;
-    int indexAmostras = -1;
     String nomeAmostra;
 
     /**
@@ -214,8 +214,8 @@ public class AmostrasQuant extends javax.swing.JFrame {
     }//GEN-LAST:event_B_LimparTabelaActionPerformed
 
     private void B_NovaAmostraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_NovaAmostraActionPerformed
-        // TODO add your handling code here:]
         nomeAmostra = JOptionPane.showInputDialog("Digite o nome da Amostra.");
+        
         DefaultTableModel modelo = (DefaultTableModel) T_Amostras.getModel();
 
         try {
@@ -225,10 +225,8 @@ public class AmostrasQuant extends javax.swing.JFrame {
                 if(amostras==null){
                     amostras = new ArrayList();
                     amostras.add(new AmostraQuantitativa(nomeAmostra));
-                    indexAmostras++;
                 }else{
                     amostras.add(new AmostraQuantitativa(nomeAmostra));
-                    indexAmostras++;
                 }
             }
         } catch (NullPointerException ex) {
@@ -243,10 +241,38 @@ public class AmostrasQuant extends javax.swing.JFrame {
     }//GEN-LAST:event_B_CancelarActionPerformed
 
     private void B_InsereValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_InsereValorActionPerformed
+        DefaultTableModel modelo = (DefaultTableModel)T_Amostras.getModel();
+        ArrayList<String> amostrasDif = new ArrayList();
+        
+        
+        if(amostras.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Você não cadastrou nenhuma amostra!","XtatistiK - Erro!", JOptionPane.ERROR_MESSAGE);
+        }else{
+            amostrasDif.add(amostras.get(0).getNomeAmostra());
+
+            for(int i = 0; i<amostras.size(); i++){ //laço que adiciona somente os valores únicos ao aux
+                for(int j = 0; j<amostras.size() ; j++){
+                    if(!amostras.get(i).getNomeAmostra().equals(amostras.get(j).getNomeAmostra())){
+                        if(!verifExistencia(amostrasDif,amostras.get(j).getNomeAmostra())){
+                            amostrasDif.add(String.valueOf(amostras.get(j).getNomeAmostra()));
+                        }
+                    }
+                }
+                break;
+            }
+        }
+        for(int i = 0; i<amostrasDif.size();i++){
+            System.out.println(amostrasDif.get(i));
+        }
+        /*
+        Object []comboBox = new Object[2];
+        
+        String amostraEscolhida = String.valueOf(JOptionPane.showInternalInputDialog(this, "Este item pertence a qual amostra?", "XtatistiK - Selecionar Amostra", JOptionPane.QUESTION_MESSAGE, null,, rootPaneCheckingEnabled));
+        
         ArrayList<String> itens = new ArrayList();
         
         String item = null;
-        DefaultTableModel modelo = (DefaultTableModel)T_Amostras.getModel();
+        
         
         String valores = JOptionPane.showInputDialog(this, "Digite o item a ser adicionado separados por ';'\n para a amostra"
                 + " " + nomeAmostra + ":", "Adicionar item", JOptionPane.QUESTION_MESSAGE);

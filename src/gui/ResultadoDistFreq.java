@@ -16,29 +16,41 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Tarcisio
  */
-public class ResultadoModa extends javax.swing.JFrame {
-    
-    //Variáveis setadas para utilização da imagem do sistema
-    //Ateção: Não apague estas variáveis.
+public class ResultadoDistFreq extends javax.swing.JFrame {
+
     URL url = this.getClass().getResource("/img/X32.png");
     Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);
     
-    /**
-     * Método que define a imagen do incone para a janela.
-     * @param iconeTitulo
-     */
     public void setTitulo(Image iconeTitulo) {
         this.setIconImage(iconeTitulo);
     }
-    
     /**
-     * Creates new form JanelaResultado
+     * Creates new form ResultadoDistFreq
      */
-    public ResultadoModa() {
+    public ResultadoDistFreq() {
         initComponents();
         setIconImage(iconeTitulo);
     }
 
+    
+    public void preencherTabela(ArrayList<String> valores, int[] freqAbs){
+        DefaultTableModel modelo = (DefaultTableModel)tabelaItens.getModel();
+        int totalValores = 0;
+        
+        for(int i = 0; i<freqAbs.length;i++){
+            totalValores += freqAbs[i];
+        }
+        
+        modelo.setRowCount(valores.size());
+        for(int i = 0; i<modelo.getRowCount();i++){
+            modelo.setValueAt((""+(i+1)), i, 0);
+            modelo.setValueAt(valores.get(i), i, 1);
+            modelo.setValueAt(String.valueOf(freqAbs[i]) , i , 2);
+            modelo.setValueAt(String.valueOf((((freqAbs[i]*1.0)/25)*100)), i, 3);
+        }
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,14 +60,39 @@ public class ResultadoModa extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelaItens = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         lbRes = new javax.swing.JLabel();
         lbTipoModa = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaItens = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("XtatistiK - Resultado");
+
+        tabelaItens.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Classe", "Limites", "Freq. Absoluta", "Freq. Relativa"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabelaItens.setToolTipText("Tabela de itens");
+        jScrollPane1.setViewportView(tabelaItens);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Histograma"));
 
@@ -80,36 +117,6 @@ public class ResultadoModa extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        tabelaItens.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Itens", "Freq. Abs."
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tabelaItens.setToolTipText("Tabela de itens");
-        jScrollPane1.setViewportView(tabelaItens);
-        if (tabelaItens.getColumnModel().getColumnCount() > 0) {
-            tabelaItens.getColumnModel().getColumn(0).setResizable(false);
-            tabelaItens.getColumnModel().getColumn(1).setResizable(false);
-        }
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -117,7 +124,7 @@ public class ResultadoModa extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -134,21 +141,6 @@ public class ResultadoModa extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void preencherTabela(ArrayList<String> itensDif, int[] freqAbs){
-        DefaultTableModel modelo = (DefaultTableModel)tabelaItens.getModel();
-        
-        modelo.setRowCount(itensDif.size());
-        for(int i = 0; i<modelo.getRowCount();i++){
-            modelo.setValueAt(itensDif.get(i), i, 0);
-            modelo.setValueAt(freqAbs[i] , i , 1);
-        }
-    }
-    
-    public void resultado(String lbRes, String lbTipoModa){
-        this.lbRes.setText(lbRes);
-        this.lbTipoModa.setText(lbTipoModa);
-    }
-    
     /**
      * @param args the command line arguments
      */
@@ -166,21 +158,20 @@ public class ResultadoModa extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ResultadoModa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ResultadoDistFreq.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ResultadoModa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ResultadoDistFreq.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ResultadoModa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ResultadoDistFreq.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ResultadoModa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ResultadoDistFreq.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ResultadoModa().setVisible(true);
+                new ResultadoDistFreq().setVisible(true);
             }
         });
     }

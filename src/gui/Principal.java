@@ -24,11 +24,11 @@ public class Principal {
        
         spl.dispose();
         
-        CalculoModa cm = new CalculoModa();
-        cm.setLocationRelativeTo(null);
+        XtatistiKPrincipal xp = new XtatistiKPrincipal();
+        xp.setLocationRelativeTo(null);
         //cm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        cm.setVisible(false);
-        cm.dispose();
-        cm.setVisible(true);
+        xp.setVisible(false);
+        xp.dispose();
+        xp.setVisible(true);
         }
 }
