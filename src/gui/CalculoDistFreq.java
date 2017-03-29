@@ -324,6 +324,10 @@ public class CalculoDistFreq extends javax.swing.JFrame {
             rdf.setLocationRelativeTo(null);
             rdf.preencherTabela(classes, freqAbs);
             rdf.setVisible(true);
+            
+            Histograma hist = new Histograma(valores, valoresIniciais[0], valoresFinais[valoresFinais.length-1]);
+            hist.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            hist.setLocationRelativeTo(null);
         }
     }//GEN-LAST:event_btCalcularActionPerformed
 
