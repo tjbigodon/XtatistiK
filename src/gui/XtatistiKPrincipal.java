@@ -52,6 +52,11 @@ public class XtatistiKPrincipal extends javax.swing.JFrame {
 
         cbEscolha.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Escolha...", "Moda", "Tabela de Distribuição de Frequências com Intervalo de Classe" }));
         cbEscolha.setToolTipText("");
+        cbEscolha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbEscolhaActionPerformed(evt);
+            }
+        });
 
         btAbrir.setText("Abrir Tela de Cálculo");
         btAbrir.addActionListener(new java.awt.event.ActionListener() {
@@ -146,6 +151,10 @@ public class XtatistiKPrincipal extends javax.swing.JFrame {
                 break;
         }
     }//GEN-LAST:event_btAbrirActionPerformed
+
+    private void cbEscolhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEscolhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbEscolhaActionPerformed
 
     /**
      * @param args the command line arguments

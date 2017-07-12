@@ -5,21 +5,38 @@
  */
 package gui;
 
+import funcoes.TesteTukey;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author IFgoiano
  */
 public class GUITesteTukey extends javax.swing.JFrame {
-
+    //Variáveis setadas para utilização da imagem do sistema
+    //Ateção: Não apague estas variáveis.
+    URL url = this.getClass().getResource("/img/X32.png");
+    Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);
+    
+    /**
+     * Método que define a imagen do incone para a janela.
+     * @param iconeTitulo
+     */
+    public void setTitulo(Image iconeTitulo) {
+        this.setIconImage(iconeTitulo);
+    }
+    
     /**
      * Creates new form GUITesteTukey
      */
     public GUITesteTukey() {
         initComponents();
-    }
+        setIconImage(iconeTitulo);
+    }                           
     
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,56 +47,59 @@ public class GUITesteTukey extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Teste Tukey"));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jButton1.setText("Voltar");
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null}
             },
             new String [] {
-                "Médias", "Análise"
+                "Comparação de Médias"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                true, false
+            Class[] types = new Class [] {
+                java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-
-        jButton1.setText("Voltar");
+        jScrollPane2.setViewportView(jTable2);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -137,12 +157,24 @@ public class GUITesteTukey extends javax.swing.JFrame {
             }
         });
     }
+    public void preenche(double qtab, double qmres, double[] amostraMedias, double dms, int[] numAmostras){
+        TesteTukey tukey = new TesteTukey();
+        String[] teste = tukey.analisaMedias(amostraMedias, tukey.calculaDMS(qtab, qmres, numAmostras[0], numAmostras[1]), numAmostras);
+        DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel(); 
+        for(int i=0; i<teste.length; i++){
+            Object[] novaLinha = new Object[1]; 
+            novaLinha[0] = teste[i];
+            modelo.addRow(novaLinha);
+        }
+        jTable2.setModel(modelo);
+         
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 }

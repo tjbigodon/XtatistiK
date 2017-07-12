@@ -5,17 +5,41 @@
  */
 package gui;
 
+import funcoes.AnovaOneWay;
+import funcoes.CV;
+import funcoes.TesteTukey;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author IFgoiano
  */
-public class GUIResAnovaOne extends javax.swing.JFrame {
 
+
+public class GUIResAnovaOne extends javax.swing.JFrame {
+    AnovaOneWay anova = new AnovaOneWay();
+
+    //Variáveis setadas para utilização da imagem do sistema
+    //Ateção: Não apague estas variáveis.
+    URL url = this.getClass().getResource("/img/X32.png");
+    Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);
+    
+    /**
+     * Método que define a imagen do incone para a janela.
+     * @param iconeTitulo
+     */
+    public void setTitulo(Image iconeTitulo) {
+        this.setIconImage(iconeTitulo);
+    }
     /**
      * Creates new form GUIcv
      */
     public GUIResAnovaOne() {
         initComponents();
+        setIconImage(iconeTitulo);
     }
 
     /**
@@ -35,6 +59,7 @@ public class GUIResAnovaOne extends javax.swing.JFrame {
         lCv = new javax.swing.JLabel();
         btVoltar = new javax.swing.JButton();
         btTesteTukey = new javax.swing.JButton();
+        resultado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,10 +107,10 @@ public class GUIResAnovaOne extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Coeficiente de Variação Experimental"));
@@ -131,15 +156,18 @@ public class GUIResAnovaOne extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btTesteTukey)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btVoltar)
-                .addGap(19, 19, 19))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(resultado)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btTesteTukey)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btVoltar)
+                        .addGap(19, 19, 19))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,9 +177,11 @@ public class GUIResAnovaOne extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btTesteTukey)
-                    .addComponent(btVoltar))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btTesteTukey)
+                        .addComponent(btVoltar))
+                    .addComponent(resultado))
                 .addGap(10, 10, 10))
         );
 
@@ -160,7 +190,9 @@ public class GUIResAnovaOne extends javax.swing.JFrame {
 
     private void btTesteTukeyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTesteTukeyActionPerformed
         //Segue para o Teste Tukey se for necessário
-        
+       GUIqTab novoq = new GUIqTab();
+       novoq.setVisible(true);
+       novoq.requestFocus();
     }//GEN-LAST:event_btTesteTukeyActionPerformed
 
     /**
@@ -200,6 +232,43 @@ public class GUIResAnovaOne extends javax.swing.JFrame {
             }
         });
     }
+    public void preenche(String amostra, double ftab){
+        double f = anova.calculaF(amostra);
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel(); 
+        Object[] novaLinha = new Object[6]; 
+        novaLinha[0] = "Tratamento";
+        novaLinha[1] = anova.getGlTrat();
+        novaLinha[2] = anova.getSqTrat();
+        novaLinha[3] = anova.getQmTrat();
+        novaLinha[4] = f;
+        novaLinha[5] = ftab;
+        modelo.addRow(novaLinha);
+        
+        Object[] novaLinha2 = new Object[4]; 
+        novaLinha2[0] = "Resíduo";
+        novaLinha2[1] = anova.getGlRes();
+        novaLinha2[2] = anova.getSqRes();
+        novaLinha2[3] = anova.getQmRes();
+        modelo.addRow(novaLinha2);
+        
+        Object[] novaLinha3 = new Object[3]; 
+        novaLinha3[0] = "Total";
+        novaLinha3[1] = anova.getGlTotal();
+        novaLinha3[2] = anova.getSqTotal();
+        modelo.addRow(novaLinha3);
+        
+        jTable1.setModel(modelo);
+        
+        if(ftab>=f){
+            btTesteTukey.setEnabled(false);
+            resultado.setText("Não é necessário fazer Teste Tukey.");
+        }
+        
+        //calculando cv
+        CV cv = new CV();
+        lCv.setText(""+cv.calculaCV(anova.getQmRes(), anova.getMediaTotal()));
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btTesteTukey;
@@ -210,5 +279,6 @@ public class GUIResAnovaOne extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lCv;
+    private javax.swing.JLabel resultado;
     // End of variables declaration//GEN-END:variables
 }
