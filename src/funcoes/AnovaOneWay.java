@@ -23,12 +23,30 @@ public class AnovaOneWay {
         private double fCalc = 0;
         private double[] amostraMedias;
         int[] numDadosPorAmostra;
+        double mediaTotal = 0;
+
+    public int[] getNumDadosPorAmostra() {
+        return numDadosPorAmostra;
+    }
+
+    public void setNumDadosPorAmostra(int[] numDadosPorAmostra) {
+        this.numDadosPorAmostra = numDadosPorAmostra;
+    }
+
+    public double getMediaTotal() {
+        return mediaTotal;
+    }
+
+    public void setMediaTotal(double mediaTotal) {
+        this.mediaTotal = mediaTotal;
+    }
 
     public AnovaOneWay(String amostra) {
         calculaF(amostra);
     }
     
-    
+    public AnovaOneWay() {
+    }
     
     public static void main(String[] args) {
         String amostrasConcat = "11,20,18 1,6,4 21,13,13 14,5,7 ";
@@ -81,7 +99,7 @@ public class AnovaOneWay {
 
         double[] numeros = new double[numerosS.length];
         
-        double mediaTotal = 0;
+        
         for (int i = 0; i < numerosS.length; i++) {
             //Separa todos os números (double) e calcula a média total
              numeros[i] = Double.parseDouble(numerosS[i]);
@@ -119,13 +137,7 @@ public class AnovaOneWay {
         
         fCalc = qmTrat/qmRes;
         
-        //Testando Teste Tukey
-        TesteTukey tukey = new TesteTukey();
-        String[] teste = tukey.analisaMedias(amostraMedias, tukey.calculaDMS(4.53, qmRes, numDadosPorAmostra[0], numDadosPorAmostra[1]), numDadosPorAmostra);
         
-        for(int i=0; i<teste.length; i++){
-            System.out.println(teste[i]);
-        }
         return fCalc;
     }
     
