@@ -12,12 +12,30 @@ import java.util.ArrayList;
  * @author Tarcisio
  */
 public class AnovaOneWay {
+        private double glTotal = 0;
+        private double glTrat = 0;
+        private double glRes = 0;
+        private double sqTotal = 0;
+        private double sqTrat = 0;
+        private double sqRes = 0;
+        private double qmTrat = 0;
+        private double qmRes = 0;
+        private double fCalc = 0;
+        private double[] amostraMedias;
+        int[] numDadosPorAmostra;
 
+    public AnovaOneWay(String amostra) {
+        calculaF(amostra);
+    }
+    
+    
+    
     public static void main(String[] args) {
         String amostrasConcat = "11,20,18 1,6,4 21,13,13 14,5,7 ";
 
-        AnovaOneWay aow = new AnovaOneWay();
-        System.out.println(aow.calculaF(amostrasConcat));
+        AnovaOneWay aow = new AnovaOneWay(amostrasConcat);
+        System.out.println(aow.fCalc);
+        System.out.println(aow.sqRes);
     }
 
     /**
@@ -27,15 +45,7 @@ public class AnovaOneWay {
      * @return o valor de F calculado
      */
     public double calculaF(String amostraConcat) {
-        double glTotal = 0;
-        double glTrat = 0;
-        double glRes = 0;
-        double sqTotal = 0;
-        double sqTrat = 0;
-        double sqRes = 0;
-        double qmTrat = 0;
-        double qmRes = 0;
-        double fCalc = 0;
+        
 
         int numAmostras = 1;
         for (int i = 0; i < amostraConcat.length(); i++) {
@@ -44,7 +54,7 @@ public class AnovaOneWay {
             }
         }
         
-        int[] numDadosPorAmostra = new int[numAmostras];
+        numDadosPorAmostra = new int[numAmostras];
         
         int numDados=0;
         int idAmostra = 0;
@@ -82,7 +92,7 @@ public class AnovaOneWay {
         glTotal = numeros.length - 1;
         glRes = glTotal - glTrat;
         
-        double[] amostraMedias = new double[numAmostras];
+        amostraMedias = new double[numAmostras];
         
         sqTotal = this.calculaSqTotal(numeros, mediaTotal);
         
@@ -99,6 +109,7 @@ public class AnovaOneWay {
                 contAux=1;
             }
         }
+        
         sqTrat = calculaSq(amostraMedias, mediaTotal, numDadosPorAmostra);
         
         sqRes = sqTotal - sqTrat;
@@ -108,6 +119,13 @@ public class AnovaOneWay {
         
         fCalc = qmTrat/qmRes;
         
+        //Testando Teste Tukey
+        TesteTukey tukey = new TesteTukey();
+        String[] teste = tukey.analisaMedias(amostraMedias, tukey.calculaDMS(4.53, qmRes, numDadosPorAmostra[0], numDadosPorAmostra[1]), numDadosPorAmostra);
+        
+        for(int i=0; i<teste.length; i++){
+            System.out.println(teste[i]);
+        }
         return fCalc;
     }
     
@@ -136,4 +154,46 @@ public class AnovaOneWay {
         
         return sq;
     }
+
+    public double getGlTotal() {
+        return glTotal;
+    }
+
+    public double getGlTrat() {
+        return glTrat;
+    }
+
+    public double getGlRes() {
+        return glRes;
+    }
+
+    public double getSqTotal() {
+        return sqTotal;
+    }
+
+    public double getSqTrat() {
+        return sqTrat;
+    }
+
+    public double getSqRes() {
+        return sqRes;
+    }
+
+    public double getQmTrat() {
+        return qmTrat;
+    }
+
+    public double getQmRes() {
+        return qmRes;
+    }
+
+    public double getfCalc() {
+        return fCalc;
+    }
+
+    public double[] getAmostraMedias() {
+        return amostraMedias;
+    }
+    
+    
 }
