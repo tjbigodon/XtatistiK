@@ -5,17 +5,28 @@
  */
 package gui;
 
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
+
 /**
  *
  * @author IFgoiano
  */
 public class GUIqTab extends javax.swing.JFrame {
-
+    URL url = this.getClass().getResource("/img/X32.png");
+    Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);
+    
+    public void setTitulo(Image iconeTitulo) {
+        this.setIconImage(iconeTitulo);
+    }
+    
     /**
      * Creates new form AnovaOne
      */
     public GUIqTab() {
         initComponents();
+        setIconImage(iconeTitulo);
     }
 
     /**
