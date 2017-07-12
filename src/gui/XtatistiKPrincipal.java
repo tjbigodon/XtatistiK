@@ -41,22 +41,15 @@ public class XtatistiKPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         cbEscolha = new javax.swing.JComboBox();
         btAbrir = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        m_Amostras = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("XtatistiK");
+        setResizable(false);
 
         jLabel1.setText("Selecione a operação desejada:");
 
-        cbEscolha.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Escolha...", "Moda", "Tabela de Distribuição de Frequências com Intervalo de Classe" }));
+        cbEscolha.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Escolha...", "Moda", "Detector de Outliers", "Tabela de Distribuição de Frequências com Intervalo de Classe", "Anova One-Way", "Intervalo de Confiança" }));
         cbEscolha.setToolTipText("");
-        cbEscolha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbEscolhaActionPerformed(evt);
-            }
-        });
 
         btAbrir.setText("Abrir Tela de Cálculo");
         btAbrir.addActionListener(new java.awt.event.ActionListener() {
@@ -65,70 +58,38 @@ public class XtatistiKPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Ferramentas");
-
-        m_Amostras.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
-        m_Amostras.setMnemonic('A');
-        m_Amostras.setText("Amostras");
-        m_Amostras.setToolTipText("Opções referentes a amostras.");
-        m_Amostras.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                m_AmostrasActionPerformed(evt);
-            }
-        });
-        jMenu2.add(m_Amostras);
-
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(209, 209, 209)
-                .addComponent(btAbrir)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(96, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(cbEscolha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(100, 100, 100))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(179, 179, 179))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(191, 191, 191)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(107, 107, 107)
+                        .addComponent(cbEscolha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(208, 208, 208)
+                        .addComponent(btAbrir)))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(14, 14, 14)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cbEscolha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btAbrir)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btAbrir, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    /**
-     * Criação de Amostras 
-     * @param evt 
-     */
-    private void m_AmostrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_AmostrasActionPerformed
-        // TODO add your handling code here:
-        Escolha tipoDado = new Escolha();
-        tipoDado.setVisible(true);
-        tipoDado.requestFocus();
-    }//GEN-LAST:event_m_AmostrasActionPerformed
-
     private void btAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAbrirActionPerformed
         
         switch(cbEscolha.getSelectedIndex()){
@@ -144,17 +105,34 @@ public class XtatistiKPrincipal extends javax.swing.JFrame {
                 break;
             case 2:
                 System.out.println(cbEscolha.getSelectedIndex());
+                GUIBoxPlot detOut = new GUIBoxPlot();
+                detOut.setLocationRelativeTo(null);
+                detOut.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                detOut.setVisible(true); 
+                break;
+            case 3:
+                System.out.println(cbEscolha.getSelectedIndex());
                 CalculoDistFreq cdf = new CalculoDistFreq();
                 cdf.setLocationRelativeTo(null);
                 cdf.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                cdf.setVisible(true);
+                cdf.setVisible(true);                
+                break;
+            case 4:
+                System.out.println(cbEscolha.getSelectedIndex());
+                CalculoAnova cao = new CalculoAnova();
+                cao.setLocationRelativeTo(null);
+                cao.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                cao.setVisible(true);                
+                break;
+            case 5:
+                System.out.println(cbEscolha.getSelectedIndex());
+                GUIintervConf interConv = new GUIintervConf();
+                interConv.setLocationRelativeTo(null);
+                interConv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                interConv.setVisible(true);                
                 break;
         }
     }//GEN-LAST:event_btAbrirActionPerformed
-
-    private void cbEscolhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEscolhaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbEscolhaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,9 +173,5 @@ public class XtatistiKPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btAbrir;
     private javax.swing.JComboBox cbEscolha;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem m_Amostras;
     // End of variables declaration//GEN-END:variables
 }

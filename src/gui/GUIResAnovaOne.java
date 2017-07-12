@@ -69,10 +69,7 @@ public class GUIResAnovaOne extends javax.swing.JFrame {
         jTable1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "FV", "GL", "SQ", "QM", "F", "fTab"
@@ -194,6 +191,7 @@ public class GUIResAnovaOne extends javax.swing.JFrame {
        
        novoq.getValues(anova);
        novoq.setVisible(true);
+       novoq.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
        novoq.requestFocus();
     }//GEN-LAST:event_btTesteTukeyActionPerformed
 

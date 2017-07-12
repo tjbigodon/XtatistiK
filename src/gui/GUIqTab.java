@@ -6,18 +6,29 @@
 package gui;
 
 import funcoes.AnovaOneWay;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 
 /**
  *
  * @author IFgoiano
  */
 public class GUIqTab extends javax.swing.JFrame {
+    URL url = this.getClass().getResource("/img/X32.png");
+    Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);
+    
+    public void setTitulo(Image iconeTitulo) {
+        this.setIconImage(iconeTitulo);
+    }
+    
 AnovaOneWay anova = new AnovaOneWay();
     /**
      * Creates new form AnovaOne
      */
     public GUIqTab() {
         initComponents();
+        setIconImage(iconeTitulo);
     }
 
     /**
@@ -118,6 +129,7 @@ AnovaOneWay anova = new AnovaOneWay();
             GUITesteTukey novoTeste = new GUITesteTukey();
             novoTeste.preenche(Double.parseDouble(qtab), anova);
             novoTeste.setVisible(true);
+            novoTeste.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             novoTeste.requestFocus();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
