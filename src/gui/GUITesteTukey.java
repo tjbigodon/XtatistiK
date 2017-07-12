@@ -5,6 +5,7 @@
  */
 package gui;
 
+import funcoes.AnovaOneWay;
 import funcoes.TesteTukey;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -56,6 +57,11 @@ public class GUITesteTukey extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Teste Tukey"));
 
         jButton1.setText("Voltar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -123,6 +129,10 @@ public class GUITesteTukey extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -157,9 +167,9 @@ public class GUITesteTukey extends javax.swing.JFrame {
             }
         });
     }
-    public void preenche(double qtab, double qmres, double[] amostraMedias, double dms, int[] numAmostras){
+    public void preenche(double qtab, AnovaOneWay anova){
         TesteTukey tukey = new TesteTukey();
-        String[] teste = tukey.analisaMedias(amostraMedias, tukey.calculaDMS(qtab, qmres, numAmostras[0], numAmostras[1]), numAmostras);
+        String[] teste = tukey.analisaMedias(anova.getAmostraMedias(), tukey.calculaDMS(qtab, anova.getQmRes(), anova.getNumDadosPorAmostra()[0], anova.getNumDadosPorAmostra()[1]), anova.getNumDadosPorAmostra());
         DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel(); 
         for(int i=0; i<teste.length; i++){
             Object[] novaLinha = new Object[1]; 

@@ -113,6 +113,11 @@ public class AmostrasQuant extends javax.swing.JFrame {
         B_DupValor.setText("Duplicar Valor");
 
         B_ExcluiValor.setText("Excluir Valor");
+        B_ExcluiValor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                B_ExcluiValorActionPerformed(evt);
+            }
+        });
 
         B_LimparTabela.setText("Limpar Tabela");
         B_LimparTabela.addActionListener(new java.awt.event.ActionListener() {
@@ -309,6 +314,10 @@ public class AmostrasQuant extends javax.swing.JFrame {
         */
 
     }//GEN-LAST:event_B_InsereValorActionPerformed
+
+    private void B_ExcluiValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_ExcluiValorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B_ExcluiValorActionPerformed
 
     /**
      * @param args the command line arguments

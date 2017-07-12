@@ -191,6 +191,8 @@ public class GUIResAnovaOne extends javax.swing.JFrame {
     private void btTesteTukeyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTesteTukeyActionPerformed
         //Segue para o Teste Tukey se for necessário
        GUIqTab novoq = new GUIqTab();
+       
+       novoq.getValues(anova);
        novoq.setVisible(true);
        novoq.requestFocus();
     }//GEN-LAST:event_btTesteTukeyActionPerformed

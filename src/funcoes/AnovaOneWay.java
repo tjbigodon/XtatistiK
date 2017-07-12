@@ -5,6 +5,7 @@
  */
 package funcoes;
 
+import gui.GUITesteTukey;
 import java.util.ArrayList;
 
 /**
@@ -54,6 +55,7 @@ public class AnovaOneWay {
         AnovaOneWay aow = new AnovaOneWay(amostrasConcat);
         System.out.println(aow.fCalc);
         System.out.println(aow.sqRes);
+       
     }
 
     /**

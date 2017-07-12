@@ -161,6 +161,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Excluir Valor"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="B_ExcluiValorActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="B_LimparTabela">
           <Properties>

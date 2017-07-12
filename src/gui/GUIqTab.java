@@ -5,12 +5,14 @@
  */
 package gui;
 
+import funcoes.AnovaOneWay;
+
 /**
  *
  * @author IFgoiano
  */
 public class GUIqTab extends javax.swing.JFrame {
-
+AnovaOneWay anova = new AnovaOneWay();
     /**
      * Creates new form AnovaOne
      */
@@ -114,6 +116,7 @@ public class GUIqTab extends javax.swing.JFrame {
         }else{
             qtab.replace(",", ".");
             GUITesteTukey novoTeste = new GUITesteTukey();
+            novoTeste.preenche(Double.parseDouble(qtab), anova);
             novoTeste.setVisible(true);
             novoTeste.requestFocus();
         }
@@ -159,6 +162,10 @@ public class GUIqTab extends javax.swing.JFrame {
                 new GUIqTab().setVisible(true);
             }
         });
+    }
+    
+    public void getValues(AnovaOneWay anova){
+        this.anova = anova;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
