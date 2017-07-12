@@ -30,6 +30,7 @@ public class CalculoAnova extends javax.swing.JFrame {
      */
     public CalculoAnova() {
         initComponents();
+        setTitle("Cálculo Anova One-Way");
         setIconImage(iconeTitulo);
     }
 

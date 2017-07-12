@@ -43,7 +43,7 @@ public class XtatistiKPrincipal extends javax.swing.JFrame {
         btAbrir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("tatistiK");
+        setTitle("XtatistiK");
         setResizable(false);
 
         jLabel1.setText("Selecione a operação desejada:");
