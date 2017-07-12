@@ -117,6 +117,13 @@ public class XtatistiKPrincipal extends javax.swing.JFrame {
                 cdf.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
                 cdf.setVisible(true);                
                 break;
+            case 4:
+                System.out.println(cbEscolha.getSelectedIndex());
+                CalculoAnova cao = new CalculoAnova();
+                cao.setLocationRelativeTo(null);
+                cao.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                cao.setVisible(true);                
+                break;
         }
     }//GEN-LAST:event_btAbrirActionPerformed
 
