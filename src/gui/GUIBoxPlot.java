@@ -46,10 +46,10 @@ public class GUIBoxPlot extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabBoxPlot = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        bNovaLinha = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        bLimparTabela = new javax.swing.JButton();
+        bExcluirLinha = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Detector de Outliers");
@@ -92,10 +92,10 @@ public class GUIBoxPlot extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Nova Linha");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        bNovaLinha.setText("Nova Linha");
+        bNovaLinha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bNovaLinhaActionPerformed(evt);
             }
         });
 
@@ -106,17 +106,17 @@ public class GUIBoxPlot extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Limpar Tabela");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        bLimparTabela.setText("Limpar Tabela");
+        bLimparTabela.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                bLimparTabelaActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Excluir Linha");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        bExcluirLinha.setText("Excluir Linha");
+        bExcluirLinha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                bExcluirLinhaActionPerformed(evt);
             }
         });
 
@@ -129,11 +129,11 @@ public class GUIBoxPlot extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(bNovaLinha)
                         .addGap(36, 36, 36)
-                        .addComponent(jButton4)
+                        .addComponent(bExcluirLinha)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
+                        .addComponent(bLimparTabela)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2)))
                 .addContainerGap())
@@ -145,9 +145,9 @@ public class GUIBoxPlot extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton4)
-                    .addComponent(jButton3)
+                    .addComponent(bNovaLinha)
+                    .addComponent(bExcluirLinha)
+                    .addComponent(bLimparTabela)
                     .addComponent(jButton2))
                 .addContainerGap())
         );
@@ -155,18 +155,18 @@ public class GUIBoxPlot extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void bNovaLinhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNovaLinhaActionPerformed
         DefaultTableModel linha = (DefaultTableModel) tabBoxPlot.getModel();
         Double[] novaLinha = null;
         linha.addRow(novaLinha);
         tabBoxPlot.setModel(linha);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_bNovaLinhaActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void bLimparTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLimparTabelaActionPerformed
         DefaultTableModel limparTabela = (DefaultTableModel) tabBoxPlot.getModel();
         limparTabela.setRowCount(0);
         tabBoxPlot.setModel(limparTabela);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_bLimparTabelaActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         DefaultTableModel pegarDados = (DefaultTableModel) tabBoxPlot.getModel();
@@ -206,7 +206,7 @@ public class GUIBoxPlot extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void bExcluirLinhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bExcluirLinhaActionPerformed
         DefaultTableModel pegarDados = (DefaultTableModel) tabBoxPlot.getModel();
         int idLinha = tabBoxPlot.getSelectedRow();
 
@@ -216,7 +216,7 @@ public class GUIBoxPlot extends javax.swing.JFrame {
             pegarDados.removeRow(idLinha);
             tabBoxPlot.setModel(pegarDados);
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_bExcluirLinhaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -254,10 +254,10 @@ public class GUIBoxPlot extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton bExcluirLinha;
+    private javax.swing.JButton bLimparTabela;
+    private javax.swing.JButton bNovaLinha;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabBoxPlot;
