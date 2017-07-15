@@ -5,6 +5,11 @@
  */
 package gui;
 
+import static funcoes.TesteT2.*;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -12,13 +17,21 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Jehymeson Gil
  */
-public class GUITesteT2 extends javax.swing.JFrame {
+public class GUITesteT extends javax.swing.JFrame {
+
+    URL url = this.getClass().getResource("/img/X32.png");
+    Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);
+
+    public void setTitulo(Image iconeTitulo) {
+        this.setIconImage(iconeTitulo);
+    }
 
     /**
      * Creates new form GUITesteT2
      */
-    public GUITesteT2() {
+    public GUITesteT() {
         initComponents();
+        setIconImage(iconeTitulo);
     }
 
     /**
@@ -103,6 +116,11 @@ public class GUITesteT2 extends javax.swing.JFrame {
         });
 
         bVerificarHipotese.setText("Verificar Hipotese");
+        bVerificarHipotese.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bVerificarHipoteseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -153,6 +171,7 @@ public class GUITesteT2 extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -180,6 +199,81 @@ public class GUITesteT2 extends javax.swing.JFrame {
         tTesteT2.setModel(limparTabela);
     }//GEN-LAST:event_bLimparTabelaActionPerformed
 
+    private void bVerificarHipoteseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVerificarHipoteseActionPerformed
+        DefaultTableModel pegarDados = (DefaultTableModel) tTesteT2.getModel();
+        int numDados = pegarDados.getRowCount();
+        ArrayList<Double> dados1 = new ArrayList();
+        ArrayList<Double> dados2 = new ArrayList();
+
+        if (numDados == 0 || numDados < 3) {
+            JOptionPane.showMessageDialog(null, "Insira novas linhas e adicione valores, \n"
+                    + "assim poderemos calcular uma hipotese.", "Atenção", 0);
+        } else {
+
+            for (int i = 0; i < numDados; i++) {
+                if (pegarDados.getValueAt(i, 0) != null) {
+                    dados1.add((Double) pegarDados.getValueAt(i, 0));
+                }
+            }
+
+            for (int i = 0; i < numDados; i++) {
+                if (pegarDados.getValueAt(i, 1) != null) {
+                    dados2.add((Double) pegarDados.getValueAt(i, 1));
+                }
+            }
+
+            //Somatoria dos valores
+            Double sum1 = somatoria(dados1);
+            Double sum2 = somatoria(dados2);
+
+            //Cálculo de Média
+            Double media1 = media(dados1, sum1);
+            Double media2 = media(dados2, sum2);
+
+            //Cálculo das diferenças ao quadrado.
+            ArrayList<Double> dif1 = diferencaQuadrada(dados1, media1);
+            ArrayList<Double> dif2 = diferencaQuadrada(dados2, media2);
+
+            Double somDif1 = somatoria(dif1);
+            Double somDif2 = somatoria(dif2);
+
+            Double variancia1 = variancia(somDif1, dados1.size());
+            Double variancia2 = variancia(somDif2, dados2.size());
+
+            if (this.getTitle().contains("T2")) {
+                Double t = xtatistikTest(media1, media2, variancia1, variancia2, dados1, dados2);
+
+                double nAsterisk = nAsterisk(media1, media2, variancia1, variancia2, dados1, dados2);
+
+                String tTab = JOptionPane.showInputDialog(this, "Entre com o valor de T tabelado para n* = " + String.valueOf(nAsterisk), "Atenção", JOptionPane.OK_CANCEL_OPTION);
+
+                try {
+                    tTab = tTab.replace(",", ".");
+                } catch (NullPointerException npe) {
+
+                }
+
+                int retorno = 3;
+
+                try {
+                    retorno = testHipotese(Double.parseDouble(tTab), t);
+                } catch (NumberFormatException nfe) {
+                    JOptionPane.showMessageDialog(this, "Erro! Digite apenas números reais neste campo!", "Erro!", JOptionPane.ERROR_MESSAGE);
+                } catch (NullPointerException npe) {
+
+                }
+
+                if (retorno == 1) {
+                    JOptionPane.showMessageDialog(this, "Resultado: Aceita-se H0!\nNão há diferenças, estatisticamente falando, entre as amostras apresentadas!\nDados:\nVariância 1: " + variancia1 + " e Variância 2: " + variancia2 + "\nMédia 1: " + media1 + " e Média 2: " + media2 + "\nT calculado: " + t, "Resultado", JOptionPane.INFORMATION_MESSAGE);
+                } else if (retorno == 0) {
+                    JOptionPane.showMessageDialog(this, "Resultado: Rejeita-se H0!\nHá diferenças, estatisticamente falando, entre as amostras apresentadas!\nDados:\nVariância 1: " + variancia1 + " e Variância 2: " + variancia2 + "\nMédia 1: " + media1 + " e Média 2: " + media2 + "\nT calculado: " + t, "Resultado", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else{
+                
+            }
+        }
+    }//GEN-LAST:event_bVerificarHipoteseActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -194,23 +288,32 @@ public class GUITesteT2 extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUITesteT2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUITesteT.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUITesteT2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUITesteT.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUITesteT2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUITesteT.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUITesteT2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUITesteT.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUITesteT2().setVisible(true);
+                new GUITesteT().setVisible(true);
             }
         });
     }

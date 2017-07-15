@@ -122,12 +122,28 @@ public class XtatistiKPrincipal extends javax.swing.JFrame {
                 cdf.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
                 cdf.setVisible(true);                
                 break;
-            case 5:
+            case 4:
                 System.out.println(cbEscolha.getSelectedIndex());
                 GUIintervConf interConv = new GUIintervConf();
                 interConv.setLocationRelativeTo(null);
                 interConv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
                 interConv.setVisible(true);                
+                break;
+            case 5:
+                System.out.println(cbEscolha.getSelectedIndex());
+                GUITesteT tT1 = new GUITesteT();
+                tT1.setLocationRelativeTo(this);
+                tT1.setTitle("Verificação de Hipótese | T1");
+                tT1.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                tT1.setVisible(true);                
+                break;
+            case 6:
+                System.out.println(cbEscolha.getSelectedIndex());
+                GUITesteT tT2 = new GUITesteT();
+                tT2.setLocationRelativeTo(this);
+                tT2.setTitle("Verificação de Hipótese | T2");
+                tT2.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                tT2.setVisible(true);                
                 break;
             case 7:
                 System.out.println(cbEscolha.getSelectedIndex());

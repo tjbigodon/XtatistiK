@@ -13,63 +13,6 @@ import java.util.ArrayList;
  */
 public class TesteT2 {
 
-    public static void main(String[] args) {
-
-        ArrayList<Double> dados1 = new ArrayList();
-        ArrayList<Double> dados2 = new ArrayList();
-
-        dados1.add(12.0);
-        dados1.add(14.0);
-        dados1.add(12.0);
-        dados1.add(9.0);
-        dados1.add(14.0);
-        dados1.add(14.0);
-        dados1.add(9.0);
-
-        dados2.add(1.0);
-        dados2.add(0.0);
-        dados2.add(0.0);
-        dados2.add(1.0);
-        dados2.add(0.5);
-        dados2.add(1.5);
-        dados2.add(0.0);
-
-        //Somatoria dos valores
-        Double sum1 = somatoria(dados1);
-        Double sum2 = somatoria(dados2);
-
-        //Cálculo de Média
-        Double media1 = media(dados1, sum1);
-        Double media2 = media(dados2, sum2);
-
-        //Cálculo das diferenças ao quadrado.
-        ArrayList<Double> dif1 = diferencaQuadrada(dados1, media1);
-        ArrayList<Double> dif2 = diferencaQuadrada(dados2, media2);
-
-        Double somDif1 = somatoria(dif1);
-        Double somDif2 = somatoria(dif2);
-
-        Double variancia1 = variancia(somDif1, dados1.size());
-        Double variancia2 = variancia(somDif2, dados2.size());
-
-        //System.out.println(variancia1);
-        //System.out.println(variancia2);
-        Double f = testeF(variancia1, variancia2);
-        //System.out.println(f);
-
-        Double t = xtatistikTest(12.0, 0.5, 5.0, 0.25, dados1, dados2);
-        //System.out.println(t);
-
-        double nAsterisk = nAsterisk(12.0, 0.5, 5.0, 0.25, dados1, dados2);
-        System.out.println(nAsterisk);
-
-        System.out.println(valorN(nAsterisk));
-        
-        double tTab = 2.36;
-        System.out.println(testHipotese(tTab, t));
-
-    }
-
     //Teste de Hipotese
     public static int testHipotese(double tTab, double tCalc) {
         double limiteInf = tTab * (-1);
