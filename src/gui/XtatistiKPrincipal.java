@@ -48,8 +48,13 @@ public class XtatistiKPrincipal extends javax.swing.JFrame {
 
         jLabel1.setText("Selecione a operação desejada:");
 
-        cbEscolha.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Escolha...", "Moda", "Detector de Outliers", "Tabela de Distribuição de Frequências com Intervalo de Classe", "Anova One-Way", "Intervalo de Confiança" }));
+        cbEscolha.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Escolha...", "Moda", "Detector de Outliers", "Tabela de Distribuição de Frequências com Intervalo de Classe", "Intervalo de Confiança", "Teste T - Tipo 1 (duas médias)", "Teste T - Tipo 2 (duas médias)", "Anova One-Way (duas ou mais médias)" }));
         cbEscolha.setToolTipText("");
+        cbEscolha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbEscolhaActionPerformed(evt);
+            }
+        });
 
         btAbrir.setText("Abrir Tela de Cálculo");
         btAbrir.addActionListener(new java.awt.event.ActionListener() {
@@ -117,13 +122,6 @@ public class XtatistiKPrincipal extends javax.swing.JFrame {
                 cdf.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
                 cdf.setVisible(true);                
                 break;
-            case 4:
-                System.out.println(cbEscolha.getSelectedIndex());
-                CalculoAnova cao = new CalculoAnova();
-                cao.setLocationRelativeTo(null);
-                cao.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                cao.setVisible(true);                
-                break;
             case 5:
                 System.out.println(cbEscolha.getSelectedIndex());
                 GUIintervConf interConv = new GUIintervConf();
@@ -131,8 +129,19 @@ public class XtatistiKPrincipal extends javax.swing.JFrame {
                 interConv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
                 interConv.setVisible(true);                
                 break;
+            case 7:
+                System.out.println(cbEscolha.getSelectedIndex());
+                CalculoAnova cao = new CalculoAnova();
+                cao.setLocationRelativeTo(null);
+                cao.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                cao.setVisible(true);                
+                break;
         }
     }//GEN-LAST:event_btAbrirActionPerformed
+
+    private void cbEscolhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEscolhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbEscolhaActionPerformed
 
     /**
      * @param args the command line arguments

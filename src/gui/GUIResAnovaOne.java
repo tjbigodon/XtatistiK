@@ -190,6 +190,7 @@ public class GUIResAnovaOne extends javax.swing.JFrame {
        GUIqTab novoq = new GUIqTab();
        
        novoq.getValues(anova);
+       novoq.setLocationRelativeTo(this);
        novoq.setVisible(true);
        novoq.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
        novoq.requestFocus();
