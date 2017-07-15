@@ -14,6 +14,10 @@ public class IntervConfianca {
     private double tTab;
     private double desvioPadraoAmostra;
     private int n;
+    
+    public static void main(String[] args) {
+        
+    }
 
     public IntervConfianca(double media, double tTab, double desvioPadraoAmostra, int n) {
         this.media = media;
@@ -63,7 +67,7 @@ public class IntervConfianca {
     }
     
     public boolean verifica(double h0){
-        if(limInf()<=h0 && h0>=limSup()){
+        if(limInf()<=h0 && h0<=limSup()){
             return true;
         }else{
             return false;

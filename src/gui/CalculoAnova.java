@@ -70,7 +70,7 @@ public class CalculoAnova extends javax.swing.JFrame {
             }
         });
 
-        btAddLinha.setText("Adicionar linha na coluna");
+        btAddLinha.setText("Adicionar Linha");
         btAddLinha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAddLinhaActionPerformed(evt);
@@ -112,7 +112,7 @@ public class CalculoAnova extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Tratamento 1", "Tratamento 2", "Tratamento 3"
+                "Tratamento 1", "Tratamento 2"
             }
         ));
         jScrollPane2.setViewportView(tbAmostras);
@@ -171,11 +171,11 @@ public class CalculoAnova extends javax.swing.JFrame {
 
     private void btRemovTratActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemovTratActionPerformed
         DefaultTableModel modelo = (DefaultTableModel) tbAmostras.getModel();
-        if (modelo.getColumnCount() > 3) {
+        if (modelo.getColumnCount() > 2) {
             modelo.setColumnCount(modelo.getColumnCount() - 1);
             tbAmostras.setModel(modelo);
         } else {
-            JOptionPane.showMessageDialog(this, "Você precisa de tratamentos amostras ou mais para calcular a Anova!", "Erro!", HEIGHT);
+            JOptionPane.showMessageDialog(this, "Você precisa de duas amostras ou mais para calcular a Anova!", "XtatistiK - Erro!", HEIGHT);
         }
     }//GEN-LAST:event_btRemovTratActionPerformed
 
@@ -247,7 +247,7 @@ public class CalculoAnova extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Digite apenas números reais!", "Erro!", JOptionPane.ERROR_MESSAGE);
                 }
                 resAnovaOne.preenche(dadosConcat, ftab);
-                
+                resAnovaOne.setLocationRelativeTo(this);
                 resAnovaOne.setVisible(true);
                 
                 

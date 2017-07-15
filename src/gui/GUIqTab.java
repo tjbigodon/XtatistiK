@@ -125,9 +125,10 @@ AnovaOneWay anova = new AnovaOneWay();
         if(qtab.isEmpty()){
             erro.setText("Campo obrigatório.");
         }else{
-            qtab.replace(",", ".");
+            qtab = qtab.replace(",", ".");
             GUITesteTukey novoTeste = new GUITesteTukey();
             novoTeste.preenche(Double.parseDouble(qtab), anova);
+            novoTeste.setLocationRelativeTo(this);
             novoTeste.setVisible(true);
             novoTeste.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             novoTeste.requestFocus();
