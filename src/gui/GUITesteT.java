@@ -5,6 +5,7 @@
  */
 package gui;
 
+import funcoes.TesteT1;
 import static funcoes.TesteT2.*;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -268,8 +269,23 @@ public class GUITesteT extends javax.swing.JFrame {
                 } else if (retorno == 0) {
                     JOptionPane.showMessageDialog(this, "Resultado: Rejeita-se H0!\nHá diferenças, estatisticamente falando, entre as amostras apresentadas!\nDados:\nVariância 1: " + variancia1 + " e Variância 2: " + variancia2 + "\nMédia 1: " + media1 + " e Média 2: " + media2 + "\nT calculado: " + t, "Resultado", JOptionPane.INFORMATION_MESSAGE);
                 }
-            } else{
-                
+            } else {
+                Double t = TesteT1.xtatistikTest(media1, media2, variancia1, variancia2, dados1, dados2);
+                String tTab = "";
+                try {
+                    tTab = JOptionPane.showInputDialog(this, "Entre com o valor de T tabelado: ", "Atenção", JOptionPane.OK_CANCEL_OPTION);
+                    tTab = tTab.replace(",", ".");
+                    int retorno = testHipotese(Double.parseDouble(tTab), t);
+                    if(retorno==1){
+                        JOptionPane.showMessageDialog(this, "Resultado: Aceita-se H0!\nNão há diferenças, estatisticamente falando, entre as amostras apresentadas!\nDados:\nVariância 1: " + variancia1 + " e Variância 2: " + variancia2 + "\nMédia 1: " + media1 + " e Média 2: " + media2 + "\nT calculado: " + t, "Resultado", JOptionPane.INFORMATION_MESSAGE);
+                    } else if(retorno==0){
+                        JOptionPane.showMessageDialog(this, "Resultado: Rejeita-se H0!\nHá diferenças, estatisticamente falando, entre as amostras apresentadas!\nDados:\nVariância 1: " + variancia1 + " e Variância 2: " + variancia2 + "\nMédia 1: " + media1 + " e Média 2: " + media2 + "\nT calculado: " + t, "Resultado", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }catch(NumberFormatException nfe){
+                    JOptionPane.showMessageDialog(this, "Erro! Digite apenas números reais neste campo!", "Erro!", JOptionPane.ERROR_MESSAGE);
+                } catch(NullPointerException npe){
+                    
+                }
             }
         }
     }//GEN-LAST:event_bVerificarHipoteseActionPerformed
