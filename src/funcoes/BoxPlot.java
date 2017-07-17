@@ -9,26 +9,27 @@ import java.util.Objects;
  */
 public class BoxPlot {
 
-    public static ArrayList<Double> retornaOutliers(ArrayList<Double> amostra) {
-        ArrayList<Double> outLiers = new ArrayList<>();
-        
-        amostra = amostraEmRol(amostra);
-        
-        double q1 = 0, q2 = 0, q3 = 0;
+    private double q1, q2, q3, aiq, limiteS, limiteI;
 
-        q1 = ((amostra.size() + 1) / 4.0); System.out.println(q1);
+    
+    
+    public ArrayList<Double> retornaOutliers(ArrayList<Double> amostra) {
+        ArrayList<Double> outLiers = new ArrayList<>();
+
+        amostra = amostraEmRol(amostra);
+        q1 = ((amostra.size() + 1.0) / 4.0);
         if (converteInteiro(String.valueOf(q1)) == -1) { //verifica se o número obtido a partir da fórmula do primeiro quartil não é inteiro
             //se não for inteiro, compara os dois elementos entre o valor do quartil (anterior e posterior), e se forem iguais, o primeiro quartil terá o valor do anterior.
-            if (Objects.equals(amostra.get((int) q1), amostra.get((int) q1-1))) {
+            if (Objects.equals(amostra.get((int) q1), amostra.get((int) q1 - 1))) {
                 q1 = amostra.get((int) q1);
             } else { //senão, é feita a interpolação.
                 q1 = amostra.get((int) q1 - 1) + (q1 - (int) q1) * (amostra.get((int) q1) - amostra.get((int) q1 - 1)); //cálculo da interpolação do quartil 1.
             }
         } else {
-            q1 = amostra.get(converteInteiro(String.valueOf(q1-1)));
+            q1 = amostra.get(converteInteiro(String.valueOf(q1 - 1)));
         }
 
-        q2 = ((2 * (amostra.size() + 1)) / 4.0); System.out.println(q2);
+        q2 = ((2.0 * (amostra.size() + 1.0)) / 4.0);
         if (converteInteiro(String.valueOf(q2)) == -1) { //verifica se o número obtido a partir da fórmula do segundo quartil não é inteiro
             //se não for inteiro, compara os dois elementos entre o valor do quartil (anterior e posterior), e se forem iguais, o segundo quartil terá o valor do anterior.
             if (Objects.equals(amostra.get((int) q2), amostra.get((int) q2 - 1))) {
@@ -37,10 +38,11 @@ public class BoxPlot {
                 q2 = amostra.get((int) q2 - 1) + (q2 - (int) q2) * (amostra.get((int) q2) - amostra.get((int) q2 - 1)); //cálculo da interpolação do quartil 1.
             }
         } else {
-            q2 = amostra.get(converteInteiro(String.valueOf(q2-1)));
+            q2 = amostra.get(converteInteiro(String.valueOf(q2 - 1)));
         }
 
-        q3 = ((3 * (amostra.size() + 1)) / 4.0); System.out.println(q3);
+        q3 = ((3 * (amostra.size() + 1)) / 4.0);
+        
         if (converteInteiro(String.valueOf(q3)) == -1) { //verifica se o número obtido a partir da fórmula do segundo quartil não é inteiro
             //se não for inteiro, compara os dois elementos entre o valor do quartil (anterior e posterior), e se forem iguais, o segundo quartil terá o valor do anterior.
             if (Objects.equals(amostra.get((int) q3), amostra.get((int) q3 - 1))) {
@@ -49,7 +51,7 @@ public class BoxPlot {
                 q3 = amostra.get((int) q3 - 1) + (q3 - (int) q3) * (amostra.get((int) q3) - amostra.get((int) q3 - 1)); //cálculo da interpolação do quartil 1.
             }
         } else {
-            q3 = amostra.get(converteInteiro(String.valueOf(q3-1)));
+            q3 = amostra.get(converteInteiro(String.valueOf(q3 - 1)));
         }
 
         String q1F = String.format("%.2f", q1);//formata o quartil 1 em duas casas decimais
@@ -63,21 +65,15 @@ public class BoxPlot {
         q2 = Double.parseDouble(q2F);
         q3 = Double.parseDouble(q3F);
 
-        double aiq = q3 - q1; //cálculo da Amplitude Inter Quartílica, ou AIQ
+        aiq = q3 - q1; //cálculo da Amplitude Inter Quartílica, ou AIQ
 
         String aiqF = String.format("%.2f", aiq);
         aiq = Double.parseDouble(aiqF.replace(',', '.'));
 
-        double limiteS = q3 + (1.5 * aiq);
-        double limiteI = q1 - (1.5 * aiq);
+        limiteS = q3 + (1.5 * aiq);
+        limiteI = q1 - (1.5 * aiq);
 
-        System.out.println("Q1: "+q1);
-        System.out.println("Q2: "+q2);
-        System.out.println("Q3: "+q3);
-        System.out.println("AIQ: "+aiq);
-        System.out.println("LI: "+limiteI);
-        System.out.println("LS: "+limiteS);
-        
+
         for (int i = 0; i < amostra.size(); i++) {
             if (amostra.get(i) < limiteI) {
                 outLiers.add(amostra.get(i));
@@ -125,5 +121,53 @@ public class BoxPlot {
         } else {
             return -1;
         }
+    }
+
+    public double getQ1() {
+        return q1;
+    }
+
+    public void setQ1(double q1) {
+        this.q1 = q1;
+    }
+
+    public double getQ2() {
+        return q2;
+    }
+
+    public void setQ2(double q2) {
+        this.q2 = q2;
+    }
+
+    public double getQ3() {
+        return q3;
+    }
+
+    public void setQ3(double q3) {
+        this.q3 = q3;
+    }
+
+    public double getAiq() {
+        return aiq;
+    }
+
+    public void setAiq(double aiq) {
+        this.aiq = aiq;
+    }
+
+    public double getLimiteS() {
+        return limiteS;
+    }
+
+    public void setLimiteS(double limiteS) {
+        this.limiteS = limiteS;
+    }
+
+    public double getLimiteI() {
+        return limiteI;
+    }
+
+    public void setLimiteI(double limiteI) {
+        this.limiteI = limiteI;
     }
 }

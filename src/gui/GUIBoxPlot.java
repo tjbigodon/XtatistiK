@@ -173,7 +173,8 @@ public class GUIBoxPlot extends javax.swing.JFrame {
         int numDados = pegarDados.getRowCount();
         ArrayList<Double> dados = new ArrayList();
         ArrayList<Double> outliers = new ArrayList();
-
+        BoxPlot bp = new BoxPlot();
+        
         if (numDados == 0 || numDados <= 3) {
             JOptionPane.showMessageDialog(null, "Insira novas linhas e adicione valores, \n"
                     + "assim poderemos detectar outlier(s) nos dados.", "Atenção", 0);
@@ -194,12 +195,12 @@ public class GUIBoxPlot extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Remova todas as linhas que não possui valores.", "Atenção", 0);
             } else {
                 dados = BoxPlot.amostraEmRol(dados);
-                outliers = BoxPlot.retornaOutliers(dados);
+                outliers = bp.retornaOutliers(dados);
 
                 if (outliers == null) {
-                    JOptionPane.showMessageDialog(null, "Não há outliers!", "Aviso", 1);
+                    JOptionPane.showMessageDialog(null, "Não há outliers!\nDados:\nQ1: "+bp.getQ1()+"\tQ2: "+bp.getQ2()+"\tQ3: "+bp.getQ3()+"\nAIQ: "+bp.getAiq()+"\nLimite Superior: "+bp.getLimiteS()+"\tLimite Inferior: "+bp.getLimiteI(), "Aviso", 1);
                 } else {
-                    JOptionPane.showMessageDialog(null, "Foram encontrados outlier(s): \n" + outliers.toString(), "Aviso", 1);
+                    JOptionPane.showMessageDialog(null, "Foram encontrados outlier(s): \n" + outliers.toString()+"\nDados:\nQ1: "+bp.getQ1()+"\nQ2: "+bp.getQ2()+"\nQ3: "+bp.getQ3()+"\nAIQ: "+bp.getAiq()+"\nLimite Superior: "+bp.getLimiteS()+"\tLimite Inferior: "+bp.getLimiteI(), "Aviso", 1);
                 }
             }
         }
